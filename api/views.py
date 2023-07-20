@@ -80,7 +80,7 @@ class ConfigurarTareaView(APIView):
         # Crear una tarea periódica para generar el documento
         schedule, _ = IntervalSchedule.objects.get_or_create(
             every=data.get('intervalo', 2),  # Usar el intervalo proporcionado por el usuario, o 2 días por defecto
-            period=IntervalSchedule.MINUTES,
+            period=IntervalSchedule.DAYS,
         )
         task_name = f'Generar documento {documento.id}'
             
