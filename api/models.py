@@ -153,7 +153,7 @@ class Tarea(models.Model):
             # Lógica para programar tarea basada en el intervalo
             schedule, created = IntervalSchedule.objects.get_or_create(
                 every=self.intervalo,
-                period=IntervalSchedule.MINUTES,
+                period=IntervalSchedule.DAYS,
             )
             task_name = f'Generar documento {self.documento.id}'
             task, created = PeriodicTask.objects.get_or_create(
@@ -178,7 +178,7 @@ class Tarea(models.Model):
             secuencia = SecuenciaTarea.objects.get(documento=self.documento, orden=orden)
             schedule, created = IntervalSchedule.objects.get_or_create(
                 every=secuencia.dias_desde_anterior,
-                period=IntervalSchedule.MINUTES,
+                period=IntervalSchedule.DAYS,
             )
             task_name = f'Generar documento {self.documento.id} - Secuencia {orden}'
             task, created = PeriodicTask.objects.get_or_create(
